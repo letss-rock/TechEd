@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechEd - Making Tech Simplified</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f0f0f0;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .dark-mode {
+            background-color: #0a0a0a;
+            color: #f0f0f0;
+        }
+
+        header {
+            background-color: #111;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 10px;
+            transition: all 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #4CAF50;
+        }
+
+        .hero {
+            background-image: url('hero-background.jpg');
+            background-size: cover;
+            color: #fff;
+            text-align: center;
+            padding: 200px 0;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .about-section {
+            text-align: center;
+            padding: 100px 0;
+            background-color: #111;
+            color: #fff;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .about-content p {
+            opacity: 0.8;
+        }
+
+        .testimonial {
+            background-color: #111;
+            color: #fff;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .testimonial-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .video-section {
+            text-align: center;
+            padding: 100px 0;
+            background-color: #1f1f1f;
+            color: #fff;
+        }
+
+        .video-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .video-content p {
+            opacity: 0.8;
+        }
+
+        .ai-section {
+            text-align: center;
+            padding: 100px 0;
+            background-color: #111;
+            color: #fff;
+        }
+
+        .ai-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        .ai-content p {
+            opacity: 0.8;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 100px 0;
+            background-color: #1f1f1f;
+            color: #fff;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            background-color: #1f1f1f;
+            color: #fff;
+        }
+
+        .contact-form input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .hero-content {
+                padding: 150px 20px;
+            }
+        }
+
+        /* Hindi Language Styles */
+        body.hindi {
+            font-family: 'Noto Sans', 'Arial', sans-serif;
+        }
+
+        .hindi #home h1,
+        .hindi #about h1,
+        .hindi #testimonial .testimonial-text,
+        .hindi #contact h2 {
+            font-family: 'Noto Sans', 'Arial', sans-serif;
+        }
+
+        /* Japanese Language Styles */
+        body.japanese {
+            font-family: 'Yu Gothic', 'Arial', sans-serif;
+        }
+
+        .japanese #home h1,
+        .japanese #about h1,
+        .japanese #testimonial .testimonial-text,
+        .japanese #contact h2 {
+            font-family: 'Yu Gothic', 'Arial', sans-serif;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            animateHero();
+            animateVideoSection();
+            animateAISection();
+            animateTestimonial();
+        });
+
+        function animateHero() {
+            const heroContent = document.querySelector('.hero-content');
+
+            setTimeout(() => {
+                heroContent.style.opacity = '1';
+                heroContent.style.transform = 'translateY(0)';
+            }, 500);
+        }
+
+        function animateVideoSection() {
+            const videoContent = document.querySelector('.video-content');
+
+            setTimeout(() => {
+                videoContent.style.opacity = '1';
+                videoContent.style.transform = 'translateY(0)';
+            }, 1000);
+        }
+
+        function animateAISection() {
+            const aiContent = document.querySelector('.ai-content');
+
+            setTimeout(() => {
+                aiContent.style.opacity = '1';
+                aiContent.style.transform = 'translateY(0)';
+            }, 1500);
+        }
+
+        function animateTestimonial() {
+            const testimonial = document.querySelector('.testimonial-content');
+
+            setTimeout(() => {
+                testimonial.style.opacity = '1';
+                testimonial.style.transform = 'translateY(0)';
+            }, 2000);
+        }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode');
+        }
+
+        function toggleLanguage(language) {
+            const body = document.body;
+            const htmlTag = document.documentElement;
+            
+            // Remove existing language classes
+            body.classList.remove('hindi', 'japanese');
+            htmlTag.removeAttribute('lang');
+            
+            // Set new language classes and HTML lang attribute
+            if (language === 'hindi') {
+                body.classList.add('hindi');
+                htmlTag.setAttribute('lang', 'hi');
+                translateContentToHindi();
+            } else if (language === 'japanese') {
+                body.classList.add('japanese');
+                htmlTag.setAttribute('lang', 'ja');
+                translateContentToJapanese();
+            } else {
+                // Default to English
+                htmlTag.setAttribute('lang', 'en');
+                translateContentToEnglish();
+            }
+        }
+
+        function translateContentToHindi() {
+            // Translate content to Hindi
+            document.getElementById('home').querySelector('h1').innerText = 'टेकएड - तकनीक सरल बनाना';
+            document.getElementById('home').querySelector('p').innerText = 'आपके लिए जानकारीपूर्ण तकनीकी वीडियो और AI अपडेट का स्रोत';
+            document.getElementById('home').querySelector('.btn').innerText = 'वीडियो देखें';
+
+            document.getElementById('about').querySelector('h1').innerText = 'टेकएड के बारे में';
+            document.getElementById('about').querySelector('p').innerText = 'टेकएड का उद्देश्य तकनीक को जानकारीपूर्ण वीडियो और AI अनुसंधान के माध्यम से सरल बनाना है। हमारा लक्ष्य है कि हर कोई तकनीक को पहुंचने और समझने में सक्षम हो सके।';
+
+            document.getElementById('video').querySelector('h1').innerText = 'हमारी वीडियो सीरीज़ अन्वेषण करें';
+            document.getElementById('video').querySelector('p').innerText = 'हमारी जानकारीपूर्ण वीडियो सीरीज़ में विभिन्न तकनीकी विषयों को अन्वेषित करें। ट्यूटोरियल्स से उद्योग के दृष्टिकोण तक, यहां सभी कुछ पाएं।';
+
+            document.getElementById('ai').querySelector('h1').innerText = 'AI अनुसंधान';
+            document.getElementById('ai').querySelector('p').innerText = 'AI और मशीन लर्निंग में नवीनतम विकासों के साथ अद्यतित रहें। हमारे चयनित अनुसंधान से मूल्यवान ज्ञान प्राप्त करें जो तकनीक के भविष्य के साथ कदम से कदम मिलाएगा।';
+
+            document.getElementById('testimonial').querySelector('.testimonial-text').innerText = '"टेकएड वीडियो और AI अनुसंधान के माध्यम से अमूल्य ज्ञान प्रदान करता है। अत्यधिक अनुशंसित!"';
+
+            document.getElementById('testimonial').querySelector('.testimonial-author').innerText = '- जॉन डो, CEO, टेक सॉल्यूशंस इंक।';
+
+            document.getElementById('contact').querySelector('h2').innerText = 'हमसे संपर्क करें';
+            document.querySelector('.contact-form input[name="name"]').setAttribute('placeholder', 'आपका नाम');
+            document.querySelector('.contact-form input[name="email"]').setAttribute('placeholder', 'आपका ईमेल');
+            document.querySelector('.contact-form textarea').setAttribute('placeholder', 'आपका संदेश');
+            document.querySelector('.contact-form input[type="submit"]').setAttribute('value', 'संदेश भेजें');
+        }
+
+        function translateContentToJapanese() {
+            // Translate content to Japanese
+            document.getElementById('home').querySelector('h1').innerText = 'TechEd - テクノロジーを簡単にする';
+            document.getElementById('home').querySelector('p').innerText = '情報豊富なテクノロジー動画とAIアップデートのソース';
+            document.getElementById('home').querySelector('.btn').innerText = 'ビデオを見る';
+
+            document.getElementById('about').querySelector('h1').innerText = 'TechEdについて';
+            document.getElementById('about').querySelector('p').innerText = 'TechEdは、情報豊富なビデオとAI研究を通じてテクノロジーを簡単にすることを目指しています。 私たちの目標は、誰もが技術にアクセスし、理解できるようにすることです。';
+
+            document.getElementById('video').querySelector('h1').innerText = 'ビデオシリーズを探索する';
+            document.getElementById('video').querySelector('p').innerText = 'チュートリアルから業界の洞察まで、情報豊富なビデオシリーズでさまざまな技術トピックを探索してください。';
+
+            document.getElementById('ai').querySelector('h1').innerText = 'AI研究';
+            document.getElementById('ai').querySelector('p').innerText = 'AIおよび機械学習の最新の進展を追いかけてください。 技術の未来に追いつくための貴重な知識を選りすぐった研究から得てください。';
+
+            document.getElementById('testimonial').querySelector('.testimonial-text').innerText = '"TechEdは、そのビデオとAI研究を通じて貴重な知識を提供します。 強くお勧めします！"';
+
+            document.getElementById('testimonial').querySelector('.testimonial-author').innerText = '- ジョン・ドウ、CEO、テックソリューションズ株式会社';
+
+            document.getElementById('contact').querySelector('h2').innerText = 'お問い合わせ';
+            document.querySelector('.contact-form input[name="name"]').setAttribute('placeholder', 'お名前');
+            document.querySelector('.contact-form input[name="email"]').setAttribute('placeholder', 'メールアドレス');
+            document.querySelector('.contact-form textarea').setAttribute('placeholder', 'メッセージ内容');
+            document.querySelector('.contact-form input[type="submit"]').setAttribute('value', 'メッセージを送信');
+        }
+
+        function translateContentToEnglish() {
+            // Translate content back to English (default)
+            document.getElementById('home').querySelector('h1').innerText = 'TechEd - Making Tech Simplified';
+            document.getElementById('home').querySelector('p').innerText = 'Your source for informative tech videos and AI updates';
+            document.getElementById('home').querySelector('.btn').innerText = 'Watch Videos';
+
+            document.getElementById('about').querySelector('h1').innerText = 'About TechEd';
+            document.getElementById('about').querySelector('p').innerText = 'TechEd is dedicated to simplifying technology through informative videos and AI research. Our goal is to make technology accessible and understandable for everyone.';
+
+            document.getElementById('video').querySelector('h1').innerText = 'Explore Our Video Series';
+            document.getElementById('video').querySelector('p').innerText = 'Explore a vast array of technical topics in our informative video series. From tutorials to industry insights, find it all here.';
+
+            document.getElementById('ai').querySelector('h1').innerText = 'AI Research';
+            document.getElementById('ai').querySelector('p').innerText = 'Stay updated with the latest developments in AI and machine learning. Gain valuable knowledge from our selected research that will assist you in keeping up with the future of technology.';
+
+            document.getElementById('testimonial').querySelector('.testimonial-text').innerText = '"TechEd provides invaluable knowledge through its video and AI research. Highly recommended!"';
+
+            document.getElementById('testimonial').querySelector('.testimonial-author').innerText = '- John Doe, CEO, Tech Solutions Inc.';
+
+            document.getElementById('contact').querySelector('h2').innerText = 'Contact Us';
+            document.querySelector('.contact-form input[name="name"]').setAttribute('placeholder', 'Your Name');
+            document.querySelector('.contact-form input[name="email"]').setAttribute('placeholder', 'Your Email');
+            document.querySelector('.contact-form textarea').setAttribute('placeholder', 'Your Message');
+            document.querySelector('.contact-form input[type="submit"]').setAttribute('value', 'Send Message');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#video">Videos</a></li>
+                <li><a href="#ai">AI Insights</a></li>
+                <li><a href="#testimonial">Testimonial</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button onclick="toggleDarkMode()">Toggle Dark Mode</button></li>
+                <li>
+                    <button onclick="toggleLanguage('en')">English</button>
+                    <button onclick="toggleLanguage('hindi')">हिंदी</button>
+                    <button onclick="toggleLanguage('japanese')">日本語</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>TechEd - Making Tech Simplified</h1>
+            <p>Your source for informative tech videos and AI updates</p>
+            <a href="#video" class="btn">Watch Videos</a>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="about-content">
+            <h1>About TechEd</h1>
+            <p>TechEd is dedicated to simplifying technology through informative videos and AI research. Our goal is to make technology accessible and understandable for everyone.</p>
+        </div>
+    </section>
+
+    <section id="video" class="video-section">
+        <div class="video-content">
+            <h1>Explore Our Video Series</h1>
+            <p>Explore a vast array of technical topics in our informative video series. From tutorials to industry insights, find it all here.</p>
+        </div>
+    </section>
+
+    <section id="ai" class="ai-section">
+        <div class="ai-content">
+            <h1>AI Research</h1>
+            <p>Stay updated with the latest developments in AI and machine learning. Gain valuable knowledge from our selected research that will assist you in keeping up with the future of technology.</p>
+        </div>
+    </section>
+
+    <section id="testimonial" class="testimonial">
+        <div class="testimonial-content">
+            <div class="testimonial-text">
+                <p>"TechEd provides invaluable knowledge through its video and AI research. Highly recommended!"</p>
+            </div>
+            <div class="testimonial-author">
+                <p>- John Doe, CEO, Tech Solutions Inc.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="contact-form">
+            <h2>Contact Us</h2>
+            <form action="#" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+                <input type="submit" value="Send Message">
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 TechEd. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
